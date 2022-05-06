@@ -5,7 +5,7 @@ void bubbleSortAscending(const float* inputArray, int numOfReadings, float* sort
    int c, d;
    float temp;
    
-	/*Initialise sorting array with input array*/
+   /*Initialise sorting array with input array*/
    for(int i=0; i< numOfReadings ; i++)
    {
 		sortedArray[i] = inputArray[i];
