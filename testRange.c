@@ -4,7 +4,7 @@
 /*infers the number of ranges when all enteries are same*/
 void TEST_CASE_01()
 {
-	float readingsArray[]={3,3,5,4,10,11,121444};
+	float readingsArray[]={4,4,4,4};
     int numOfReadings = sizeof(readingsArray)/sizeof(readingsArray[0]);
 	printf ("\n TEST_CASE_01 \nInput Array : ");
 	printArray (readingsArray, numOfReadings);
@@ -41,15 +41,7 @@ void TEST_CASE_04()
     assert(detectRanges(readingsArray, numOfReadings) == 5);
 }
 
-/*"infers the number of ranges for invalid Array in negative value*/
-void TEST_CASE_05()
-{
-	float readingsArray[]={3,3,-5,4,10,11,4};
-    int numOfReadings = sizeof(readingsArray)/sizeof(readingsArray[0]);
-	printf ("\n TEST_CASE_05 \nInput Array : ");
-	printArray (readingsArray, numOfReadings);
-    assert(detectRanges(readingsArray, numOfReadings) == 1);
-}
+
 
 int main()
 {
@@ -57,6 +49,5 @@ int main()
 	TEST_CASE_02();
 	TEST_CASE_03();
 	TEST_CASE_04();
-	TEST_CASE_05();
 	return 0;
 }
