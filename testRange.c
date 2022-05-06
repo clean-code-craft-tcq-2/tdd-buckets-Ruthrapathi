@@ -31,7 +31,7 @@ void TEST_CASE_03()
     assert(detectRanges(readingsArray, numOfReadings) == 2);
 }
 
-/*"infers the number of ranges when mixed values in flaot*/
+/*"infers the number of ranges when mixed values in float*/
 void TEST_CASE_04()
 {
 	float readingsArray[]={3.7, 1.2, 2.5, 4.5, 1.1, 11.2, 12.1,10.5,20,20.5};
