@@ -51,3 +51,7 @@ Start Test-driven approach
 1. Write the smallest possible failing test: give input `4,5`. assert output to be `4-5, 2`.
 1. Write the minimum amount of code that'll make it pass.
 1. Refactor any assumptions, continue to pass this test. Do not add any code without a corresponding test.
+
+Implement one failing test and at least one passing test:
+
+##TestCase_01 To implement minimum check for the function float readingsArray[]={4,4,4,4}; int numOfReadings = sizeof(readingsArray)/sizeof(readingsArray[0]); assert(detectRanges(readingsArray, numOfReadings) == 1);
