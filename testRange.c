@@ -1,4 +1,4 @@
-#include "frequentRange.h"
+#include "frequentCurrentRange.h"
 #include <assert.h>
 
 /*infers the number of ranges when all enteries are same*/
