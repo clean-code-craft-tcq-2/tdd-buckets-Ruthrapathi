@@ -8,7 +8,7 @@ int detectRanges(const float* readingsArray, int numOfReadings)
     {	   
 	  float sortedArray[numOfReadings];
    	
-	  /*Sort the input array */	
+      /*Sort the input array */	
       bubbleSortAscending(readingsArray, numOfReadings, sortedArray);
   
       /*check for ranges */
