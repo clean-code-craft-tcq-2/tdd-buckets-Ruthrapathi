@@ -54,4 +54,6 @@ Start Test-driven approach
 
 Implement one failing test and at least one passing test:
 
-##TestCase_01 To implement minimum check for the function float readingsArray[]={4,4,4,4}; int numOfReadings = sizeof(readingsArray)/sizeof(readingsArray[0]); assert(detectRanges(readingsArray, numOfReadings) == 1);
+TestCase_01 : implement minimum check for the function float readingsArray[]={4,4,4,4}; 
+int numOfReadings = sizeof(readingsArray)/sizeof(readingsArray[0]); 
+assert(detectRanges(readingsArray, numOfReadings) == 1);
