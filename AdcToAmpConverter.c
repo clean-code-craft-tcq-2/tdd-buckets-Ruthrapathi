@@ -1,57 +1,73 @@
-#include "AdcToAmpConverter.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <cmath>
+#include "A2DConverter.h"
 
-#define CONVERT_ADC_AMP(AdcValue)   ((float)((AdcParameterStruct.AdcConversionScale*(ADCValue))/(float)(AdcParameterStruct.MaxValueReadByAdc)) + (float)AdcParameterStruct.AdcConversionOffset)
-#define IS_GREATER_THAN_MAX_VALUE(ADCValue)  (ADCValue > AdcParameterStruct.MaxValueReadByAdc)
 
-static int RoundOffToNearestIntegerValue(float value)
+void PrintReadingFaultyMessage(void)
 {
-  int IntegerVal = 0;
-  float Precesiondifference = value - (int)value;
-
-  if(fabs(Precesiondifference) <= 0.5)
-  {
-   IntegerVal = (int)value;
-  }
-  else
-  {
-      if(Precesiondifference > 0)
-      {
-          IntegerVal = (int)value + 1;
-      }
-      else
-      {
-          IntegerVal = (int)value - 1;
-      }
-  }
-  return IntegerVal;
+	printf("Readings are faulty\n");
 }
 
-int ConvertAdcToAmp(int ADCValue, int* CurrentInAmp)
-{
- int returnValue = ADCToAmpConversionNotSucessful;
- 
- if(IS_GREATER_THAN_MAX_VALUE(ADCValue))
- {
-  returnValue = ADCToAmpConversionNotSucessful;  
- }
- else
- {
-  *CurrentInAmp = RoundOffToNearestIntegerValue(CONVERT_ADC_AMP(ADCValue));
-   returnValue = ADCToAmpConversionSucessful;
- }
- 
-  return returnValue;
+float convertInputIntegerToCurrentValue(float conversionValue, float scalingFactor, int MinCurrentValue, int MaxCurrentValue){
+	float currentValue;	
+	currentValue = MinCurrentValue + (MaxCurrentValue * conversionValue * scalingFactor);
+	return currentValue;
 }
 
-int ConvertAdcArrayToAmpArray(int* AdcArray, int* CurrentArrayInAmp, unsigned int sizeOfAdcArray)
+int calculateTotalCurrentRange(int maxCurrentValue, int minCurrentValue) {
+	int totalCurrentRange;
+	totalCurrentRange = maxCurrentValue - minCurrentValue;
+	return totalCurrentRange;
+}
+
+float calculateMultiplyingFactor(int x, int y) {
+	float multiplyingFactor;
+	multiplyingFactor = float(x) / float(y);
+	return multiplyingFactor;
+}
+
+int GetMaxValueOfConverter(int ResolutionSize)
 {
-  unsigned int arrayIndex = 0;
-  int returnValue = 0;
+	return (pow(2,ResolutionSize) - 2);
+}
+
+void AtoDConvert(int CurrentSamplesAnalog[],int NumOfCurrentSamples,int CurrentSamplesDigital[],int A2DResolution, int MaxCurrentValue, int MinCurrentValue){
+	int loopIndex;
+	int totalCurrentRange;
+	float currentCurrentValue;
+	int maxConverterValue; 
+	float conversionValue;
+	float scalingFactor;
+	
+	maxConverterValue = GetMaxValueOfConverter(A2DResolution);
+	totalCurrentRange = calculateTotalCurrentRange(MaxCurrentValue, MinCurrentValue);
+	scalingFactor = calculateMultiplyingFactor(totalCurrentRange, MaxCurrentValue);
+	for (loopIndex=0; loopIndex< NumOfCurrentSamples; loopIndex++){
+		conversionValue = calculateMultiplyingFactor(CurrentSamplesAnalog[loopIndex], maxConverterValue);
+		currentCurrentValue = convertInputIntegerToCurrentValue(conversionValue, scalingFactor, MinCurrentValue, MaxCurrentValue);
+		CurrentSamplesDigital[loopIndex] = round(currentCurrentValue);
+		if(CurrentSamplesDigital[loopIndex] <0){
+			CurrentSamplesDigital[loopIndex] = abs(CurrentSamplesDigital[loopIndex]);
+		}
+	}
+}
+
+bool ConvertAnalogToDigitalAmpere(int *CurrentSamplesAnalog,int NumOfCurrentSamples,int *CurrentSamplesDigital,int A2DResolution, int MaxCurrentValue, int MinCurrentValue){
+  bool AreAllSamplesOk = ALL_SAMPLES_OK;
+  int loopIndex;
   
-  for(arrayIndex = 0;arrayIndex < sizeOfAdcArray;arrayIndex++)
+  for(loopIndex=0;loopIndex<NumOfCurrentSamples;loopIndex++){
+    if(CurrentSamplesAnalog[loopIndex] > (GetMaxValueOfConverter(A2DResolution))){
+	AreAllSamplesOk = ALL_SAMPLES_NOT_OK;
+	PrintReadingFaultyMessage();	
+	break;
+	}
+  }
+  if(AreAllSamplesOk == ALL_SAMPLES_OK)
   {
-    returnValue |= ConvertAdcToAmp(AdcArray[arrayIndex], &CurrentArrayInAmp[arrayIndex]);
+	 AtoDConvert(CurrentSamplesAnalog, NumOfCurrentSamples,CurrentSamplesDigital, A2DResolution, MaxCurrentValue, MinCurrentValue);
   }
   
-  return returnValue;
+  return AreAllSamplesOk ;
 }
