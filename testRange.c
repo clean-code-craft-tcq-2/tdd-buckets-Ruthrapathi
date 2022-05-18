@@ -50,9 +50,9 @@ void TEST_CASE_04()
 // Test Instance 1 
 void TEST_CASE_05()
 {
-  float CurrentSamplesAnalog[] = {4095};
+  int CurrentSamplesAnalog[] = {4095};
   int numOfReadings = sizeof(CurrentSamplesAnalog) / sizeof(CurrentSamplesAnalog[0]);
-  int CurrentSamplesDigital[numOfReadings];
+  float CurrentSamplesDigital[numOfReadings];
   printf ("\n TEST_CASE_05 \n Test Instance 1 : Error Reading available");
   assert(ConvertAnalogToDigitalAmpere(CurrentSamplesAnalog, numOfReadings,CurrentSamplesDigital,A2D_RESOLUTION,MAXCURRENTVALUE,MINCURRENTVALUE) == ALL_SAMPLES_NOT_OK);
 }
