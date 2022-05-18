@@ -50,7 +50,7 @@ void TEST_CASE_04()
 // Test Instance 1 
 void TEST_CASE_05()
 {
-  int CurrentSamplesAnalog[] = {4095};
+  float CurrentSamplesAnalog[] = {4095};
   int numOfReadings = sizeof(CurrentSamplesAnalog) / sizeof(CurrentSamplesAnalog[0]);
   int CurrentSamplesDigital[numOfReadings];
   printf ("\n TEST_CASE_05 \n Test Instance 1 : Error Reading available");
@@ -62,7 +62,7 @@ void TEST_CASE_06()
 {
   int CurrentSamplesAnalog[] = {4094, 819,3790,1230,1640,2870};
   int numOfReadings = sizeof(CurrentSamplesAnalog) / sizeof(CurrentSamplesAnalog[0]);
-  int CurrentSamplesDigital[numOfReadings];
+  float CurrentSamplesDigital[numOfReadings];
   printf ("\n TEST_CASE_05 \n Test Instance 2 : Test Conversion and Setting of Ranges for 12 bit");
 	
   int ExpectedCurrentinAmps[] = {10, 2, 9, 3, 4 , 7};
@@ -83,7 +83,7 @@ void TEST_CASE_07()
 {
   int CurrentSamplesAnalog_10bit[] = {1022,511,0};
   int numOfReadings = sizeof(CurrentSamplesAnalog_10bit) / sizeof(CurrentSamplesAnalog_10bit[0]);
-  int CurrentSamplesDigital_10bit[numOfReadings];
+  float CurrentSamplesDigital_10bit[numOfReadings];
   printf ("\n TEST_CASE_05 \n Test Instance 3 : Test Conversion and Setting of Ranges for 10 bit");
 	
   int ExpectedCurrentinAmps_10bit[] = {15,0,15};
