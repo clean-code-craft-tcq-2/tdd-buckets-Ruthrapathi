@@ -2,6 +2,10 @@
 #include "a2dConverter.h"
 #include <assert.h>
 
+#define A2D_RESOLUTION  12
+#define MAXCURRENTVALUE 10
+#define MINCURRENTVALUE 0
+
 /*infers the number of ranges when all enteries are same*/
 void TEST_CASE_01()
 {
