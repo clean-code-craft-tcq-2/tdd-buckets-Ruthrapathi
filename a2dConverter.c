@@ -32,7 +32,7 @@ int GetMaxValueOfConverter(int ResolutionSize)
 	return (pow(2,ResolutionSize) - 2);
 }
 
-void AtoDConvert(int CurrentSamplesAnalog[],int NumOfCurrentSamples,int CurrentSamplesDigital[],int A2DResolution, int MaxCurrentValue, int MinCurrentValue){
+void AtoDConvert(int CurrentSamplesAnalog[],int NumOfCurrentSamples,float CurrentSamplesDigital[],int A2DResolution, int MaxCurrentValue, int MinCurrentValue){
 	int loopIndex;
 	int totalCurrentRange;
 	float currentCurrentValue;
@@ -53,7 +53,7 @@ void AtoDConvert(int CurrentSamplesAnalog[],int NumOfCurrentSamples,int CurrentS
 	}
 }
 
-bool ConvertAnalogToDigitalAmpere(int *CurrentSamplesAnalog,int NumOfCurrentSamples,int *CurrentSamplesDigital,int A2DResolution, int MaxCurrentValue, int MinCurrentValue){
+bool ConvertAnalogToDigitalAmpere(int *CurrentSamplesAnalog,int NumOfCurrentSamples,float *CurrentSamplesDigital,int A2DResolution, int MaxCurrentValue, int MinCurrentValue){
   bool AreAllSamplesOk = ALL_SAMPLES_OK;
   int loopIndex;
   
