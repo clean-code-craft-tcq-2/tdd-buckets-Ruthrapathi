@@ -71,7 +71,7 @@ void TEST_CASE_06()
 	{
 		assert(CurrentSamplesDigital[i] == ExpectedCurrentinAmps[i]);
 	}
-  assert(CheckChargingCurrentSamplesRange(CurrentSamplesDigital, numOfReadings) == 3);
+  assert(detectRanges(CurrentSamplesDigital, numOfReadings) == 3);
 }
 
 // Test Instance 3 
@@ -92,7 +92,7 @@ void TEST_CASE_07()
 	{
 		assert(CurrentSamplesDigital_10bit[i] == ExpectedCurrentinAmps_10bit[i]);
 	}
-  assert(CheckChargingCurrentSamplesRange(CurrentSamplesDigital_10bit, numOfReadings) == 2);
+  assert(detectRanges(CurrentSamplesDigital_10bit, numOfReadings) == 2);
 }
 
 int main()
