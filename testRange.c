@@ -63,7 +63,7 @@ void TEST_CASE_06()
   int CurrentSamplesAnalog[] = {4094, 819,3790,1230,1640,2870};
   int numOfReadings = sizeof(CurrentSamplesAnalog) / sizeof(CurrentSamplesAnalog[0]);
   float CurrentSamplesDigital[numOfReadings];
-  printf ("\n TEST_CASE_05 \n Test Instance 2 : Test Conversion and Setting of Ranges for 12 bit");
+  printf ("\n TEST_CASE_06 \n Test Instance 2 : Test Conversion and Setting of Ranges for 12 bit");
 	
   int ExpectedCurrentinAmps[] = {10, 2, 9, 3, 4 , 7};
   assert(ConvertAnalogToDigitalAmpere(CurrentSamplesAnalog, numOfReadings,CurrentSamplesDigital,A2D_RESOLUTION,MAXCURRENTVALUE,MINCURRENTVALUE) == ALL_SAMPLES_OK);
@@ -84,7 +84,7 @@ void TEST_CASE_07()
   int CurrentSamplesAnalog_10bit[] = {1022,511,0};
   int numOfReadings = sizeof(CurrentSamplesAnalog_10bit) / sizeof(CurrentSamplesAnalog_10bit[0]);
   float CurrentSamplesDigital_10bit[numOfReadings];
-  printf ("\n TEST_CASE_05 \n Test Instance 3 : Test Conversion and Setting of Ranges for 10 bit");
+  printf ("\n TEST_CASE_07 \n Test Instance 3 : Test Conversion and Setting of Ranges for 10 bit");
 	
   int ExpectedCurrentinAmps_10bit[] = {15,0,15};
   assert(ConvertAnalogToDigitalAmpere(CurrentSamplesAnalog_10bit, numOfReadings,CurrentSamplesDigital_10bit,A2D_RESOLUTION,MAXCURRENTVALUE,MINCURRENTVALUE) == ALL_SAMPLES_OK);
